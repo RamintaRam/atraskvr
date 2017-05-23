@@ -235,3 +235,6 @@ Route::group(['prefix' => 'admin', 'middleware' => ['auth', 'check-role-super-ad
     });
 
 });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
