@@ -13,4 +13,10 @@ class VRUsers extends CoreModel
     {
         return $this->belongsToMany(VRRoles::class, 'vr_users_roles_connections', 'users_id', 'roles_id');
     }
+
+    public function getTableName()
+    {
+        $tableName = substr($this->table, 3);
+        return $tableName;
+    }
 }
