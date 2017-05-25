@@ -7,31 +7,37 @@
 
             <h3>Create new: {{substr($tableName, 0, -1)}}</h3>
 
-            {{--@if(isset($error))--}}
-                {{--<div class="alert alert-danger">--}}
-                    {{--<strong>{{ $error['message'] }}</strong>--}}
-                {{--</div>--}}
-            {{--@endif--}}
+            @if(isset($error))
+                <div class="alert alert-danger">
+                    <strong>{{ $error['message'] }}</strong>
+                </div>
+            @endif
 
-            {{--@if(isset($comment))--}}
-                {{--<div class="alert alert-success">--}}
-                    {{--<strong>{{ $comment['message'] }}</strong>--}}
-                {{--</div>--}}
-            {{--@endif--}}
+            @if(isset($comment))
+                <div class="alert alert-success">
+                    <strong>{{ $comment['message'] }}</strong>
+                </div>
+            @endif
 
-            {{--{!! Form::open(['url' => route('app.' . $tableName . '.store')]) !!}--}}
+            {!! Form::open(['url' => route('app.' . $tableName . '.store')]) !!}
 
 
             @foreach($fields as $field)
 
-                @if($field == 'pages_categories_id')
+                @if($field == 'user_id')
 
                 {{--@elseif($field == 'calories' and $tableName == 'pizzas')--}}
 
                 @elseif(isset($dropdown) and substr($field, -3) == '_id')
                     <div class="form-group">
-                        {!! Form::label($field, 'Choose ' . ucfirst(substr($field, 0, -4) . ':')) !!}
+                        {!! Form::label($field, 'Choose ' . ucfirst(substr($field, 0, -3) . ':')) !!}
                         {{Form::select($field ,$dropdown[$field], '', ['class' => 'form-control'])}}<br/>
+                    </div>
+
+                @elseif($field == 'short_description' || $field == 'long_description')
+                    <div class="form-group">
+                        {!! Form::label($field, 'Enter ' . ucfirst($field . ':')) !!}
+                        {!! Form::textarea($field, ['class' => 'form-control'])!!}<br/>
                     </div>
 
                 @elseif(isset($checkbox[$field]))
