@@ -54,7 +54,7 @@ class VRPagesController extends Controller {
 	public function adminStore()
 	{
         $data = request()->all();
-        
+
         $dataFromModel = new VRPages();
         $configuration['fields'] = $dataFromModel->getFillable();
         $configuration['tableName'] = $dataFromModel->getTableName();
