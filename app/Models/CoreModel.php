@@ -18,17 +18,6 @@ class CoreModel extends Model
     use UuidTrait;
 
 
-    protected static function boot() {
-        parent::boot();
-        static::creating(function($model) {
-            if(!isset($model->attributes['id'])) {
-                $model->attributes['id'] = Uuid::uuid4();
-            } else {
-                $model->{$model->getKeyName()} = $model->attributes['id'];
-            }
-        });
-    }
-
     public function getFillable()
     {
         unset($this->fillable[0]);

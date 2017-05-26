@@ -1,4 +1,4 @@
-@extends('admin.main')
+@extends ('admin.main')
 
 @section('content')
 
@@ -24,20 +24,10 @@
 
             @foreach($fields as $field)
 
-                @if($field == 'user_id')
-
-                {{--@elseif($field == 'calories' and $tableName == 'pizzas')--}}
-
-                @elseif(isset($dropdown) and substr($field, -3) == '_id')
+                @if(isset($dropdown) and substr($field, -3) == '_id')
                     <div class="form-group">
-                        {!! Form::label($field, 'Choose ' . ucfirst(substr($field, 0, -3) . ':')) !!}
+                        {!! Form::label($field, 'Choose ' . ucfirst(substr($field, 0, -4) . ':')) !!}
                         {{Form::select($field ,$dropdown[$field], '', ['class' => 'form-control'])}}<br/>
-                    </div>
-
-                @elseif($field == 'short_description' || $field == 'long_description')
-                    <div class="form-group">
-                        {!! Form::label($field, 'Enter ' . ucfirst($field . ':')) !!}
-                        {!! Form::textarea($field, ['class' => 'form-control'])!!}<br/>
                     </div>
 
                 @elseif(isset($checkbox[$field]))
@@ -48,6 +38,17 @@
 							{{Form::label($checkboxItem, $checkboxItem)}}</span><br/>
                     @endforeach<br/>
 
+                @elseif($field == 'password')
+                    <div class="form-group">
+                        {!! Form::label($field, 'Enter ' . ucfirst($field . ':')) !!}
+                        {!! Form::password($field, ['class' => 'form-control'])!!}<br/>
+                    </div>
+
+                @elseif($field == 'description_long' || $field == 'description_short')
+                    <div class="form-group">
+                        {!! Form::label($field, 'Enter ' . ucfirst($field . ':')) !!}
+                        {!! Form::textarea($field, '', ['class' => 'form-control'])!!}<br/>
+                    </div>
 
                 @elseif($field)
                     <div class="form-group">

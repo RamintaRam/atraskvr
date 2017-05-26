@@ -15,7 +15,7 @@ class VRPagesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function adminIndex()
 	{
 		//
 	}
@@ -31,17 +31,17 @@ class VRPagesController extends Controller {
         $dataFromModel = new VRPages();
         $configuration['fields'] = $dataFromModel->getFillable();
         $configuration['tableName'] = $dataFromModel->getTableName();
-        $configuration['dropdown']['pages_categories_id']=VRPagesCategories::all()->pluck('id')->toArray();
-        $configuration['dropdown']['cover_image_id']=VRResources::all()->pluck('name', 'id')->toArray();
-        $configuration['dropdown']['language_id']=VRLanguages::all()->pluck('name', 'id')->toArray();
-        $configuration['dropdown']['description_short']=VRPagesTranslations::all()->pluck('name', 'id')->toArray();
-        $configuration['dropdown']['description_long']=VRPagesTranslations::all()->pluck('name', 'id')->toArray();
-//dd($configuration);
+        $configuration['dropdown']['pages_categories_id'] = VRPagesCategories::all()->pluck('count', 'id')->toArray();
+        $configuration['dropdown']['cover_image_id'] = VRResources::all()->pluck('path', 'id')->toArray();
+        $configuration['dropdown']['languages_id'] = VRLanguages::all()->pluck( 'name', 'id')->toArray();
+        array_push ($configuration['fields'],'title') ;
+        array_push ($configuration['fields'],'slug') ;
+        array_push ($configuration['fields'],'languages_id');
+        array_push ($configuration['fields'],'description_short') ;
+        array_push ($configuration['fields'],'description_long') ;
 
-        array_push($configuration['fields'], "language_id");
-        array_push($configuration['fields'], "short_description");
-        array_push($configuration['fields'], "long_description");
-//        $configuration['cache'] = cache()->get('super-ingredient');
+
+
         return view('admin.pages', $configuration);
 	}
 
@@ -53,54 +53,41 @@ class VRPagesController extends Controller {
 	 */
 	public function adminStore()
 	{
-
+        $data = request()->all();
+        
         $dataFromModel = new VRPages();
         $configuration['fields'] = $dataFromModel->getFillable();
         $configuration['tableName'] = $dataFromModel->getTableName();
-        $configuration['dropdown']['pages_categories_id']=VRPagesCategories::all()->pluck('id')->toArray();
-        $configuration['dropdown']['cover_image_id']=VRResources::all()->pluck('id')->toArray();
-        $configuration['dropdown']['language_id']=VRLanguages::all()->pluck('name', 'id')->toArray();
-        $configuration['dropdown']['description_short']=VRPagesTranslations::all()->pluck('name', 'id')->toArray();
-        $configuration['dropdown']['description_long']=VRPagesTranslations::all()->pluck('name', 'id')->toArray();
-//dd($configuration);
+        $configuration['dropdown']['pages_categories_id'] = VRPagesCategories::all()->pluck('count', 'id')->toArray();
+        $configuration['dropdown']['cover_image_id'] = VRResources::all()->pluck('path', 'id')->toArray();
+        array_push ($configuration['fields'],'title') ;
+        array_push ($configuration['fields'],'slug') ;
+        $configuration['dropdown']['languages_id'] = VRLanguages::all()->pluck( 'name', 'id')->toArray();
+        array_push ($configuration['fields'],'languages_id');
+        array_push ($configuration['fields'],'description_short') ;
+        array_push ($configuration['fields'],'description_long') ;
 
-        array_push($configuration['fields'], "language_id");
-        array_push($configuration['fields'], "short_description");
-        array_push($configuration['fields'], "long_description");
+        $record = VRPages::create($data);
 
+        /*$rec['pages_id'] = $record['id'];
+        $rec['title'] = $data['title'];
+        $rec['languages_id'] = $data['languages_id'];
+        $rec['slug'] = $data['slug'];
+        $rec['description_short'] = $data['description_short'];
+        $rec['description_long'] = $data['description_long'];
 
-        foreach ($configuration['fields'] as $key => $value) {
-            if (!isset($data[$value])) {
-                $configuration['error'] = ['message' => trans('Please enter ' . $value)];
-                return view('admin.pages', $configuration);
-            }
-        }
+        dd($data, $rec);*/
 
-        VRPages::create($data);
-        $configuration['comment'] = ['message' => trans('Record added successfully')];
+        $data['pages_id'] = $record['id'];
 
-//        $record = VRPages::create($data);
-//        $record->pagesConnections()->sync($data['languages']);
+        VRPagesTranslations::create($data);
 
-//        $missingValuesNot= '';
-//        $missingValues= '';
-//        foreach($configuration['fields'] as $key=> $value) {
-//            if ($value == 'comment'){}
-//            elseif ($value == 'language_id'){}
-//            elseif (!isset($data[$value])) {
-//                $missingValues = $missingValues . ' ' . $value . ',';
-//            }
-//        }
-//        if ($missingValues  != $missingValuesNot){
-//            $missingValues = substr($missingValues, 1, -1);
-//            $configuration['error'] = ['message' => trans('Please enter ' . $missingValues)];
-//            return view('admin.pages', $configuration);
-//        }
-//
-//        $record = VRPages::create($data);
-//        $record->languages()->sync($data['languages']);
-
+        $configuration['comment'] = ['message' => trans(substr($configuration['tableName'], 0, -1) . ' added successfully')];
         return view('admin.pages', $configuration);
+
+
+//        return redirect()->route('app.categories.index');
+
 	}
 
 	/**
