@@ -245,3 +245,4 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/file', ['as' => 'admin.resources.index', 'uses' => 'VRFilesController@adminIndex']);
 
+Route::post('/file', ['as' => 'admin.resources.store', 'uses' => 'VRFilesController@adminStore']);

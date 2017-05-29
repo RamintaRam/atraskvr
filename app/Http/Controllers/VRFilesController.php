@@ -1,5 +1,7 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\VRPages;
+use App\Models\VRPagesResourcesConnections;
 use Illuminate\Routing\Controller;
 
 class VRFilesController extends Controller {
@@ -33,9 +35,33 @@ class VRFilesController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function adminStore()
 	{
-		//
+//        $resource = request()->file('file');
+//        $resourceController = new VRResourcesController();
+//        $record = $resourceController->upload($resource);
+//        VRPagesResourcesConnections::create([
+//            "pages_id" => "f94cb50b-8b7c-457b-b44c-4616974ddb94",
+//            "resources_id" => $record->id,
+
+
+            VRPagesResourcesConnections::create([
+                'pages_id' => $data['pages_id'],
+                'resources_id' => $data['resources_id'],
+
+]);
+
+
+        $data = request()->all();
+        $resource = request()->file('image');
+        $imageUpload = new VRUploadController();
+        $record = $imageUpload->upload($resource);
+
+
+        $page = VRPages::create([
+            'pages_categories_id' => $data['category_'],
+            'cover_image_id' => $record['id']
+        ]);
 	}
 
 	/**
