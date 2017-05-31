@@ -80,6 +80,14 @@ class VRMenusController extends Controller
         $configuration['record'] = VRMenus::find($id)->toArray();
         $configuration['tableName'] = $dataFromModel->getTableName();
 
+        $dataFromModel2 = new VRMenusTranslations();
+        $configuration['fields_translations'] = $dataFromModel2->getFillable();
+        unset($configuration['fields_translations'][1]);
+        unset($configuration['fields_translations'][2]);
+
+        $configuration['translations'] = VRMenusTranslations::all()->where('menus_id', '=', $id)->toArray();
+        $configuration['languages_names'] = VRLanguages::all()->pluck('name', 'id')->toArray();
+
         return view('admin.single', $configuration);
     }
 
@@ -131,7 +139,7 @@ class VRMenusController extends Controller
             $configuration[ 'translationExist' ] = true;
         }
 
-        $configuration['fullComment'] = 'Record updated successfully';
+        $configuration['comment'] = ['message' => trans('Record added successfully')];
 
         return view('admin.list', $configuration);
     }
