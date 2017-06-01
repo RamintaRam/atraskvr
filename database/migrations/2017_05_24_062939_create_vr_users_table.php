@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
 
 class CreateVrUsersTable extends Migration {
 
@@ -23,6 +24,7 @@ class CreateVrUsersTable extends Migration {
 			$table->string('password');
 			$table->string('email');
 			$table->string('phone');
+            $table->rememberToken()->nullable();
 		});
 	}
 

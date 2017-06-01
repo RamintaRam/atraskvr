@@ -14,21 +14,13 @@ class VRResourcesController extends Controller {
 
     public function upload(UploadedFile $file)
     {
-        $data = [
-            "size" => $file->getSize(),
-            "mime_type" => $file->getMimeType(),
-        ];
-        $path = '/file'. date('/y/m/d');
-        $fileName = Carbon::now()->timestamp . '_' . $file->getClientOriginalName();
-        $file->move(public_path($path), $fileName);
-        $data["path"]= $path . $fileName;
-        return VRResources::create($data);
+
     }
 
 
 	public function adminIndex()
 	{
-
+        return view('admin.resources');
 	}
 
 	/**
