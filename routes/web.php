@@ -267,3 +267,9 @@ Route::group(['prefix' => 'admin'], function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get( '/html', function () {
+    return view('html');
+});
+
+Route::get('/', ['as' => 'frontend.index','uses' => 'VRFrontendController@adminIndex']);

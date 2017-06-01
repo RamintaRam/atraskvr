@@ -1,0 +1,13 @@
+a {
+    color: white;
+}
+
+nav
+{
+    background-color: black;
+}
+
+a:hover
+{
+    color: #fd7b52;
+}
