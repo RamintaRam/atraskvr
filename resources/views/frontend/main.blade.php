@@ -7,11 +7,10 @@
     @include('frontend.includes.css')
 </head>
 <body>
-<div id="main" class="row">
-    <div id="sidebar" class="col-md-12">
-        @include('frontend.includes.navigation')
-    </div>
-</div>
+
+@include('frontend.includes.navigation')
+
+
 
 @yield('content')
 
