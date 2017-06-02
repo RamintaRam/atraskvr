@@ -1,5 +1,9 @@
 <?php namespace App\Http\Controllers;
 
+use App\Models\VRMenus;
+use App\Models\VRMenusTranslations;
+use App\Models\VRPagesCategoriesTranslations;
+use App\Models\VRPagesTranslations;
 use Illuminate\Routing\Controller;
 
 class VRFrontendController extends Controller {
@@ -12,7 +16,9 @@ class VRFrontendController extends Controller {
 	 */
 	public function adminIndex()
 	{
-		return view('frontend.index');
+        $configuration['menu'] = VRMenusTranslations::all()->where('languages_id', '=', 'lt')->toArray();
+        $configuration['pages'] = VRPagesTranslations::all()->where('languages_id', '=', 'lt')->toArray();
+		return view('frontend.index', $configuration);
 	}
 
 	/**

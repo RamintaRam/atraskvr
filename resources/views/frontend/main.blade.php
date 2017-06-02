@@ -10,13 +10,17 @@
 
 @include('frontend.includes.navigation')
 
+
+
 @yield('content')
 
 @include('frontend.includes.footer')
 
 
-@include('frontend.includes.js')
-@yield('script')
+
+
 
 </body>
+@include('frontend.includes.js')
+@yield('script')
 </html>
