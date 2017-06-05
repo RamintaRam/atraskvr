@@ -29,14 +29,89 @@
     color: white;
 }
 
-@media screen and (min-width: 1024px)
-{
-    body{
-    background-color: lightgreen;
-}
-}
+
 
 #part-01
 {
-    background-image: url('../images/background-foto.jpg');
+    background: url('../images/background-foto.jpg') no-repeat center center;
+    height: 1255px;
+    width: 100%;
+    background-size: cover;
+    -webkit-transition: height 1s;
+}
+
+#red-flag
+{
+    background: url('../images/red-flag.png') no-repeat;
+    width: 268px;
+    height: 176px;
+    margin:0 auto;
+    background-position-y: -150px;
+
+}
+
+
+#partner-logo
+{
+    width: 240px;
+    height: 176px;
+    background: url('../images/elektro.png') no-repeat;
+    margin: 0 auto;
+    background-size: contain;
+    color: #FF958B;
+    font-size: 18px;
+    text-align: center;
+    background-position-y: 70px;
+    padding-top: 38px;
+}
+
+#title
+{
+    font-family: 'Nunito Sans', sans-serif;
+    font-size: 10vw;
+    text-align: center;
+    text-transform: uppercase;
+    color: #f2f2f2;
+    text-shadow: 0 0 20px rgba(0,0,0,0.5);
+    transform: scale(0.9,1.2);
+
+}
+
+#cover-text
+{
+
+    background-color: #FD7B52;
+    color: #f2f2f2;
+    width: 332px;
+    height: 70px;
+    text-align: center;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    padding: 10px 10px;
+    font-size: 18px;
+    margin: 0 auto;
+    background-position-y: 150px;
+}
+
+
+
+@media screen and (min-width: 1024px)
+{
+    body{
+        background-color: lightgreen;
+    }
+}
+
+@media screen and (max-width: 640px) {
+    #part-01
+    {
+        height: 986px;
+    }
+}
+
+
+
+@media (min-width: 640px) and (max-width: 1024px){
+    #cover-text {
+
+    }
 }
