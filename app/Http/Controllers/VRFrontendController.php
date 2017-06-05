@@ -18,7 +18,7 @@ class VRFrontendController extends Controller {
 	{
         $configuration['menu'] = VRMenusTranslations::all()->where('languages_id', '=', 'lt')->toArray();
         $configuration['pages'] = VRPagesTranslations::all()->where('languages_id', '=', 'lt')->toArray();
-		return view('frontend.index', $configuration);
+		return view('frontend.home', $configuration);
 	}
 
 	/**
