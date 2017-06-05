@@ -5,9 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\VRLanguages;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App;
+use Illuminate\Support\Facades\Lang;
 
 class VRLanguagesController extends Controller
 {
+
+//    public function changeLanguage(Request $request)
+//    {
+//        if ($request->ajax()) {
+//            $request->session()->put('locale', $request->locale());
+//            $request->session()->flash('alert-success',('app.Locale_Change_Success'));
+//        }
+//    }
     /**
      * Display a listing of the resource.
      * GET /pages categories
