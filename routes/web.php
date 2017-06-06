@@ -273,3 +273,11 @@ Route::get( '/html', function () {
 });
 
 Route::get('/', ['as' => 'frontend.index','uses' => 'VRFrontendController@adminIndex']);
+
+Route::post('/language-chooser', 'VRLanguagesController@changeLanguage');
+Route::post('/language/', array(
+    'before' =>'csrf',
+        'as' => 'language-chooser',
+        'uses' => 'VRLanguagesController@changeLanguage',
+    )
+);
