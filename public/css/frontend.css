@@ -5,6 +5,7 @@
     display: -webkit-flex;
     -webkit-justify-content: space-around;
     justify-content: space-around;
+
 }
 
 #menu, #menu ul li .dropdown-menu

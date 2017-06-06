@@ -13,10 +13,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-Route::get( '/', function () {
-    return view('welcome');
-});
-
 Route::group(['prefix' => 'admin'], function () {
 
     Route::get('/', function () {
@@ -272,12 +268,14 @@ Route::get( '/html', function () {
     return view('html');
 });
 
-Route::get('/', ['as' => 'frontend.index','uses' => 'VRFrontendController@adminIndex']);
+//Route::post('/language-chooser', 'VRLanguagesController@changeLanguage');
+//Route::post('/language/', array(
+//        'as' => 'language-chooser',
+//        'uses' => 'VRLanguagesController@changeLanguage',
+//    )
+//);
 
-Route::post('/language-chooser', 'VRLanguagesController@changeLanguage');
-Route::post('/language/', array(
-    'before' =>'csrf',
-        'as' => 'language-chooser',
-        'uses' => 'VRLanguagesController@changeLanguage',
-    )
-);
+Route::group(['prefix' => '{lang?}'], function ()
+{
+    Route::get('/', ['as' => 'frontend.index','uses' => 'VRFrontendController@adminIndex']);
+});
